@@ -1,0 +1,38 @@
+<div class="shadow-sm border-b px-4 py-2" [style.background]="'var(--header-bg)'" [style.border-color]="'var(--border)'">
+  <div class="max-w-full mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+    <div class="flex items-center space-x-4">
+      <div>
+        <h1 class="text-xl font-bold" [style.color]="'var(--text-primary)'">
+          <i class="fas fa-bullseye" [style.color]="'var(--primary)'"></i> Pointing Poker
+        </h1>
+        <p class="text-xs" [style.color]="'var(--text-secondary)'">
+          Welcome, <span class="font-semibold">{{ userName }}</span>
+        </p>
+      </div>
+    </div>
+    
+    <div class="flex items-center space-x-3">
+      <!-- Theme Switcher -->
+      <app-theme-switcher></app-theme-switcher>
+      
+      <!-- Room ID -->
+      <div class="flex items-center space-x-2">
+        <div class="text-right">
+          <p class="text-xs uppercase tracking-wide" [style.color]="'var(--text-secondary)'">Room ID</p>
+          <p class="text-lg font-mono font-bold tracking-wider" [style.color]="'var(--primary)'">{{ roomId }}</p>
+        </div>
+        <button
+          (click)="copyRoomId()"
+          class="px-3 py-1.5 text-sm rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1"
+          [style.background-color]="copySuccess ? 'var(--success-light)' : 'var(--primary-light)'"
+          [style.color]="copySuccess ? 'var(--success)' : 'var(--primary)'"
+          [style.border]="'2px solid ' + (copySuccess ? 'var(--success)' : 'var(--primary)')"
+        >
+          <i class="fas" [class.fa-copy]="!copySuccess" [class.fa-check]="copySuccess"></i>
+          <span *ngIf="!copySuccess"> Copy Link</span>
+          <span *ngIf="copySuccess"> Copied!</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+{
+  "name": "pointing-poker-beta",
+  "version": "1.0.0",
+  "description": "Real-time Pointing Poker application with Angular and Socket.io",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm start",
+    "build:server": "cd server && npm run build",
+    "build:client": "cd client && npm run build"
+  },
+  "keywords": [
+    "pointing-poker",
+    "scrum",
+    "agile",
+    "estimation"
+  ],
+  "author": "",
+  "license": "MIT"
+}
+

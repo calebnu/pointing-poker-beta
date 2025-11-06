@@ -1,0 +1,20 @@
+<button
+  (click)="onCardClick()"
+  [disabled]="disabled"
+  [class.selected]="selected"
+  [class.disabled]="disabled"
+  class="voting-card border-2 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-offset-1 relative overflow-hidden"
+  [style.background-color]="selected ? 'var(--card-gradient-start)' : 'var(--card-bg)'"
+  [style.border-color]="selected ? 'var(--primary)' : 'var(--border)'"
+  [style.color]="'var(--text-primary)'"
+>
+  <!-- Poker Card Background (only when selected) -->
+  <div *ngIf="selected && cardSuit" class="poker-suits">
+    <span class="suit-top-left" [ngClass]="cardSuit.colorClass">{{ cardSuit.symbol }}</span>
+    <span class="suit-bottom-right" [ngClass]="cardSuit.colorClass">{{ cardSuit.symbol }}</span>
+  </div>
+  
+  <!-- Value -->
+  <span class="relative z-10">{{ value }}</span>
+</button>
+

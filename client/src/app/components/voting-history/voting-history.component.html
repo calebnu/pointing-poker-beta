@@ -1,0 +1,85 @@
+<div class="rounded-lg shadow-sm border flex flex-col h-[calc(100vh-8rem)]" [style.background-color]="'var(--card-bg)'" [style.border-color]="'var(--border)'">
+  <div class="p-3 border-b flex justify-between items-center" [style.border-color]="'var(--border)'" [style.background-color]="'var(--primary-light)'">
+    <h3 class="text-sm font-semibold" [style.color]="'var(--text-primary)'">
+      <i class="fas fa-history" [style.color]="'var(--primary)'"></i> Voting History
+    </h3>
+    <button
+      *ngIf="history.length > 0"
+      (click)="downloadJSON()"
+      class="px-2 py-1 rounded text-xs font-semibold transition-all hover:scale-105"
+      [style.background-color]="'var(--primary)'"
+      [style.color]="'white'"
+      title="Download voting results as JSON"
+    >
+      <i class="fas fa-download"></i> Export
+    </button>
+  </div>
+  
+  <div class="flex-1 overflow-y-auto p-3">
+    <div *ngIf="history.length === 0" class="text-center py-8" [style.color]="'var(--text-muted)'">
+      <p class="text-xs">No voting rounds yet</p>
+      <p class="text-xs mt-1">Complete rounds appear here</p>
+    </div>
+
+    <div class="space-y-2">
+      <div 
+        *ngFor="let round of history.slice().reverse(); let i = index" 
+        class="border rounded-lg p-2 transition-colors group"
+        [style.border-color]="'var(--border)'"
+      >
+        <!-- Header -->
+        <div class="flex justify-between items-start mb-1">
+          <div class="flex-1">
+            <h4 class="font-semibold text-xs" [style.color]="'var(--text-primary)'">{{ round.description }}</h4>
+            <div class="flex items-center space-x-2 text-xs" [style.color]="'var(--text-secondary)'">
+              <span>{{ formatDate(round.timestamp) }}</span>
+              <span>•</span>
+              <span><i class="fas fa-clock"></i> {{ formatDuration(round.durationSeconds) }}</span>
+            </div>
+          </div>
+          <div class="flex items-center space-x-1">
+            <div class="px-2 py-1 rounded text-sm font-bold border-2" 
+                 [style.background-color]="'var(--primary)'" 
+                 [style.color]="'white'"
+                 [style.border-color]="'var(--primary-dark)'">
+              {{ formatAverage(round.average) }}
+            </div>
+            <button
+              (click)="onDeleteHistory(history.length - 1 - i)"
+              class="opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded"
+              [style.color]="'var(--danger)'"
+              title="Delete this entry"
+            >
+              <i class="fas fa-trash text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Votes -->
+        <div class="mt-1 space-y-0.5">
+          <div 
+            *ngFor="let entry of getVoteEntries(round.votes, round.participants)"
+            class="flex justify-between items-center text-xs px-2 py-0.5 rounded"
+            [style.background-color]="'var(--primary-light)'"
+          >
+            <span class="truncate" [style.color]="'var(--text-primary)'">{{ entry.name }}</span>
+            <span class="font-bold ml-1" [style.color]="'var(--text-primary)'">{{ entry.vote }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <app-confirm-modal
+    *ngIf="showDeleteConfirm"
+    title="Evidence Removal Required"
+    message="This voting record will be permanently removed from the archives. Proceed with evidence deletion?"
+    confirmText="Delete Evidence"
+    cancelText="Keep Record"
+    confirmButtonClass="warning"
+    iconClass="fa-user-shield"
+    (confirm)="onConfirmDelete()"
+    (cancel)="onCancelDelete()"
+  ></app-confirm-modal>
+</div>

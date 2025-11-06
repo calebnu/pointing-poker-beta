@@ -1,0 +1,74 @@
+<!-- Backdrop -->
+<div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+  <!-- Modal -->
+  <div 
+    class="rounded-xl shadow-2xl max-w-md w-full p-6 relative animate-fadeIn"
+    [style.background-color]="'var(--card-bg)'"
+    [style.border]="'2px solid var(--border)'"
+  >
+    <!-- Header -->
+    <div class="text-center mb-6">
+      <div class="text-5xl mb-3">❤️</div>
+      <h2 class="text-2xl font-bold mb-2" [style.color]="'var(--text-primary)'">
+        Don't Forget to Donate!
+      </h2>
+      <p class="text-sm" [style.color]="'var(--text-secondary)'">
+        Pointing Poker is free and open-source. Your support helps keep it running!
+      </p>
+    </div>
+
+    <!-- Main Actions -->
+    <div class="space-y-3 mb-4">
+      <button
+        (click)="onPayPal()"
+        class="w-full py-3 px-4 rounded-lg font-semibold text-white transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center justify-center space-x-2"
+        style="background-color: #0070ba;"
+      >
+        <i class="fab fa-paypal"></i>
+        <span>Donate via PayPal</span>
+      </button>
+
+      <button
+        (click)="onContactCreator()"
+        class="w-full py-3 px-4 rounded-lg font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center justify-center space-x-2"
+        [style.background-color]="'var(--primary)'"
+        [style.color]="'white'"
+      >
+        <i class="fas fa-envelope"></i>
+        <span>Contact Creator</span>
+      </button>
+    </div>
+
+    <!-- Separator -->
+    <div class="relative my-4">
+      <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t" [style.border-color]="'var(--border)'"></div>
+      </div>
+      <div class="relative flex justify-center text-xs">
+        <span class="px-2" [style.background-color]="'var(--card-bg)'" [style.color]="'var(--text-muted)'">
+          Or
+        </span>
+      </div>
+    </div>
+
+    <!-- Secondary Actions (Small) -->
+    <div class="flex justify-center space-x-4 text-xs">
+      <button
+        (click)="onAlreadyDonated()"
+        class="px-3 py-1.5 rounded transition-all hover:underline"
+        [style.color]="'var(--text-secondary)'"
+      >
+        I already donated
+      </button>
+      
+      <button
+        (click)="onDontWantToDonate()"
+        class="px-3 py-1.5 rounded transition-all hover:underline"
+        [style.color]="'var(--text-secondary)'"
+      >
+        I don't want to donate
+      </button>
+    </div>
+  </div>
+</div>
+

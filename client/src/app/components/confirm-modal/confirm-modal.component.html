@@ -1,0 +1,89 @@
+<!-- Backdrop -->
+<div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 animate-fadeIn">
+  <!-- Modal -->
+  <div 
+    class="rounded-xl shadow-2xl max-w-md w-full p-6 relative animate-scaleIn"
+    [style.background-color]="'var(--card-bg)'"
+    [style.border]="'2px solid var(--border)'"
+  >
+    <!-- Icon -->
+    <div class="flex justify-center mb-4">
+      <div class="w-16 h-16 rounded-full flex items-center justify-center"
+           [ngStyle]="{
+             'background': confirmButtonClass === 'warning' ? 'linear-gradient(135deg, #fef3c7, #fde68a)' : '',
+             'background-color': confirmButtonClass === 'danger' ? 'var(--danger-light)' : (confirmButtonClass === 'warning' ? '' : 'var(--primary-light)')
+           }">
+        <i class="fas text-3xl"
+           [class.fa-exclamation-triangle]="confirmButtonClass === 'danger' && !iconClass"
+           [class.fa-question-circle]="confirmButtonClass === 'primary' && !iconClass"
+           [class]="iconClass"
+           [ngStyle]="{
+             'color': confirmButtonClass === 'warning' ? '#f59e0b' : (confirmButtonClass === 'danger' ? 'var(--danger)' : 'var(--primary)')
+           }">
+        </i>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <h2 class="text-xl font-bold text-center mb-3" [style.color]="'var(--text-primary)'">
+      {{ title }}
+    </h2>
+
+    <!-- Message -->
+    <p class="text-center mb-6" [style.color]="'var(--text-secondary)'">
+      {{ message }}
+    </p>
+
+    <!-- Actions -->
+    <div class="flex gap-3 mb-4">
+      <button
+        (click)="onCancel()"
+        class="flex-1 py-3 px-4 rounded-lg font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 border-2"
+        [style.background-color]="'transparent'"
+        [style.border-color]="'var(--border)'"
+        [style.color]="'var(--text-primary)'"
+      >
+        {{ cancelText }}
+      </button>
+
+      <button
+        (click)="onConfirm()"
+        class="flex-1 py-3 px-4 rounded-lg font-semibold text-white transition-all focus:outline-none focus:ring-2 focus:ring-offset-2"
+        [ngStyle]="{
+          'background': confirmButtonClass === 'warning' ? 'linear-gradient(135deg, #fbbf24, #f59e0b)' : '',
+          'background-color': confirmButtonClass === 'danger' ? 'var(--danger)' : (confirmButtonClass === 'warning' ? '' : 'var(--primary)')
+        }"
+      >
+        {{ confirmText }}
+      </button>
+    </div>
+
+    <!-- Download Option (if enabled) -->
+    <div *ngIf="showDownload">
+      <!-- Separator -->
+      <div class="relative my-4">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t" [style.border-color]="'var(--border)'"></div>
+        </div>
+        <div class="relative flex justify-center text-xs">
+          <span class="px-2" [style.background-color]="'var(--card-bg)'" [style.color]="'var(--text-muted)'">
+            Optional
+          </span>
+        </div>
+      </div>
+
+      <!-- Download Link -->
+      <div class="flex justify-center text-xs">
+        <button
+          (click)="onDownload()"
+          class="px-3 py-1.5 rounded transition-all hover:underline flex items-center space-x-1"
+          [style.color]="'var(--success)'"
+        >
+          <i class="fas fa-download"></i>
+          <span>{{ downloadText }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

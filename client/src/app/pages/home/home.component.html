@@ -1,0 +1,87 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 to-amber-50 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+  <!-- Animated Background Numbers -->
+  <div class="animated-votes-container">
+    <div 
+      *ngFor="let vote of animatedVotes; let i = index"
+      class="animated-vote"
+      [style.left.%]="vote.left"
+      [style.animation-delay.s]="vote.animationDelay"
+      [style.animation-duration.s]="vote.duration"
+    >
+      {{ vote.value }}
+    </div>
+  </div>
+
+  <div class="max-w-md w-full relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-5xl font-bold text-gray-900 mb-3">
+        <i class="fas fa-bullseye text-primary-600"></i> Pointing Poker
+      </h1>
+      <p class="text-lg text-gray-700">Real-time estimation for agile teams</p>
+    </div>
+
+    <!-- Error message -->
+    <div *ngIf="error" class="mb-6 bg-red-50 border border-red-300 text-red-800 px-4 py-3 rounded-lg text-center">
+      <i class="fas fa-exclamation-triangle"></i> {{ error }}
+    </div>
+
+    <!-- Single Join/Create Form -->
+    <div class="bg-white shadow-lg rounded-xl p-8 border-2 border-orange-200">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-6 text-center">Join or Create Room</h2>
+      
+      <div class="space-y-4">
+        <div>
+          <label for="userName" class="block text-sm font-medium text-gray-700 mb-2">
+            <i class="fas fa-user text-primary-600"></i> Your Name *
+          </label>
+          <input
+            id="userName"
+            type="text"
+            [(ngModel)]="userName"
+            (keyup.enter)="onJoinOrCreate()"
+            [disabled]="isProcessing"
+            placeholder="Enter your name"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all disabled:bg-gray-100"
+          />
+        </div>
+
+        <div>
+          <label for="roomId" class="block text-sm font-medium text-gray-700 mb-2">
+            <i class="fas fa-door-open text-primary-600"></i> Room ID (optional)
+          </label>
+          <input
+            id="roomId"
+            type="text"
+            [(ngModel)]="roomId"
+            (keyup.enter)="onJoinOrCreate()"
+            [disabled]="isProcessing"
+            placeholder="Leave empty to create new room"
+            maxlength="6"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all uppercase disabled:bg-gray-100 font-mono text-lg tracking-wider text-center"
+          />
+        </div>
+
+        <button
+          (click)="onJoinOrCreate()"
+          [disabled]="isProcessing || !userName.trim()"
+          class="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold py-4 px-6 rounded-lg hover:from-primary-700 hover:to-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg text-lg"
+        >
+          <i class="fas" [class.fa-spinner]="isProcessing" [class.fa-spin]="isProcessing" [class.fa-play]="!isProcessing"></i>
+          <span *ngIf="!isProcessing"> {{ roomId.trim() ? 'Join Room' : 'Create New Room' }}</span>
+          <span *ngIf="isProcessing"> Processing...</span>
+        </button>
+      </div>
+
+      <div class="mt-6 text-center text-sm text-gray-600 space-y-2">
+        <p><i class="fas fa-info-circle text-primary-600"></i> <strong>Without Room ID:</strong> Creates a new room</p>
+        <p><i class="fas fa-info-circle text-primary-600"></i> <strong>With Room ID:</strong> Joins existing or creates it</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-6 text-center text-gray-600 text-sm">
+      <p><i class="fas fa-share-alt text-primary-600"></i> Share the room link with your team to collaborate</p>
+    </div>
+  </div>
+</div>

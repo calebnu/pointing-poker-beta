@@ -1,0 +1,73 @@
+.voting-card {
+  cursor: pointer;
+  user-select: none;
+  min-width: 60px;
+  aspect-ratio: 5 / 7; /* Playing card ratio */
+  flex: 0 1 auto;
+}
+
+@media (max-width: 640px) {
+  .voting-card {
+    min-width: 50px;
+    max-width: 65px;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .voting-card {
+    min-width: 60px;
+    max-width: 75px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .voting-card {
+    min-width: 70px;
+    max-width: 90px;
+  }
+}
+
+.voting-card.selected {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Poker card suits styling */
+.poker-suits {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.suit-top-left,
+.suit-bottom-right {
+  position: absolute;
+  font-size: 1.8rem; /* 60% of 3rem */
+}
+
+.suit-top-left {
+  top: 6px;
+  left: 6px;
+}
+
+.suit-bottom-right {
+  bottom: 6px;
+  right: 6px;
+  transform: rotate(180deg);
+}
+
+.suit-red {
+  color: var(--suit-red);
+  opacity: 0.3;
+}
+
+.suit-dark {
+  color: var(--suit-dark);
+  opacity: 0.3;
+}
+
+.voting-card.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

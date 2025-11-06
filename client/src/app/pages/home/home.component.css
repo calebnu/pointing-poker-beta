@@ -1,0 +1,80 @@
+/* Animated votes background */
+.animated-votes-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.animated-vote {
+  position: absolute;
+  top: 100%;
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgba(194, 65, 12, 0.35);
+  animation: floatUp linear infinite;
+  font-family: monospace;
+}
+
+@keyframes floatUp {
+  0% {
+    top: 100%;
+    opacity: 0;
+    transform: translateX(0) rotate(0deg);
+  }
+  10% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    top: -10%;
+    opacity: 0;
+    transform: translateX(20px) rotate(15deg);
+  }
+}
+
+/* Add different sizes for variety */
+.animated-vote:nth-child(3n) {
+  font-size: 2.5rem;
+  color: rgba(194, 65, 12, 0.3);
+}
+
+.animated-vote:nth-child(3n+1) {
+  font-size: 1.5rem;
+  color: rgba(234, 88, 12, 0.4);
+}
+
+.animated-vote:nth-child(5n) {
+  font-size: 3rem;
+  color: rgba(154, 52, 18, 0.25);
+}
+
+/* Slight horizontal drift variations */
+.animated-vote:nth-child(2n) {
+  animation-name: floatUpDriftLeft;
+}
+
+@keyframes floatUpDriftLeft {
+  0% {
+    top: 100%;
+    opacity: 0;
+    transform: translateX(0) rotate(0deg);
+  }
+  10% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    top: -10%;
+    opacity: 0;
+    transform: translateX(-20px) rotate(-15deg);
+  }
+}

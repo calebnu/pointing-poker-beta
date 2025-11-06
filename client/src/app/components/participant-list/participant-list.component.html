@@ -1,0 +1,50 @@
+<div class="rounded-lg shadow-sm border p-3" [style.background-color]="'var(--card-bg)'" [style.border-color]="'var(--border)'">
+  <h3 class="text-sm font-semibold mb-2" [style.color]="'var(--text-primary)'">
+    <i class="fas fa-users" [style.color]="'var(--primary)'"></i> Participants ({{ participants.length }})
+  </h3>
+  
+  <div class="space-y-1">
+    <div 
+      *ngFor="let participant of participants" 
+      class="flex items-center justify-between p-2 rounded-lg transition-colors"
+      [style.background-color]="participant.id === currentUserId ? 'var(--primary-light)' : 'transparent'"
+    >
+      <div class="flex items-center space-x-2">
+        <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold"
+             [style.background-color]="'var(--primary-light)'"
+             [style.color]="'var(--primary)'">
+          {{ participant.name.charAt(0).toUpperCase() }}
+        </div>
+        <div>
+          <p class="text-sm font-medium" [style.color]="'var(--text-primary)'">
+            {{ participant.name }}
+            <span *ngIf="participant.id === currentUserId" class="text-xs ml-1" [style.color]="'var(--primary)'">(You)</span>
+          </p>
+        </div>
+      </div>
+      
+      <div class="flex items-center">
+        <span 
+          *ngIf="participant.hasVoted"
+          class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium"
+          [style.background-color]="'var(--success-light)'"
+          [style.color]="'var(--success)'"
+        >
+          <i class="fas fa-check mr-1"></i> Voted
+        </span>
+        <span 
+          *ngIf="!participant.hasVoted"
+          class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium"
+          [style.background-color]="'var(--warning-light)'"
+          [style.color]="'var(--warning)'"
+        >
+          <i class="fas fa-clock mr-1"></i> Waiting
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="participants.length === 0" class="text-center py-4" [style.color]="'var(--text-muted)'">
+    <p class="text-xs">No participants yet</p>
+  </div>
+</div>
