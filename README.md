@@ -4,12 +4,34 @@ A real-time pointing poker application for agile teams. Users can create or join
 
 ## Features
 
-- 🎯 Create or join rooms with auto-generated IDs
-- 🃏 Vote using Fibonacci sequence (0, 1, 2, 3, 5, 8, 13, 21, ?, ☕)
-- 👥 Real-time participant tracking
+### Core Voting
+- 🎯 Create or join rooms with 6-character IDs (auto-generated or custom)
+- 🃏 Vote using: 1, 2, 3, 5, 8, 13, 20, 40, 100, +, ?
+- 🎴 **Poker card styling** with suit symbols (♣, ♦, ♠, ♥) on selected cards
+- 👥 Real-time participant tracking with voted/waiting status
 - 🔄 Live vote updates with reveal/clear functionality
+- 📝 Optional task/story description field (auto-generates from timestamp if empty)
+
+### History & Analytics
+- 📊 **Voting history** with complete round tracking
+- ⏱️ **Live timer** showing duration of current voting round
+- 📈 Results display with average, most common vote, and distribution
+- 💾 **Export voting history to JSON**
+- 🗑️ Delete individual history items with confirmation
+
+### User Experience
+- 🎨 **Dual theme system**: Warm Orange (default) and Monokai Dark
+- 📱 Responsive design with adaptive card sizing
+- 🔗 **Share room via URL** - direct join links
+- ✨ **Animated background** on home page
+- 🎯 No admin role - all users have equal permissions
 - 🧹 Automatic room cleanup when empty
-- 👨‍👩‍👧‍👦 No admin role - all users have equal permissions
+
+### Real-time Features
+- ⚡ Socket.io for instant synchronization
+- 🔴 Live participant status updates
+- ⏰ Real-time timer across all clients
+- 🔄 Immediate vote reflection
 
 ## Tech Stack
 

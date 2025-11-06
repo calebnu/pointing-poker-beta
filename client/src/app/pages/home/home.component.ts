@@ -28,8 +28,8 @@ export class HomeComponent implements OnInit {
   ) {}
 
   private generateAnimatedVotes(): void {
-    // Generate 20 floating vote numbers
-    for (let i = 0; i < 20; i++) {
+    // Generate 80 floating vote numbers
+    for (let i = 0; i < 80; i++) {
       this.animatedVotes.push({
         value: this.voteValues[Math.floor(Math.random() * this.voteValues.length)],
         left: Math.random() * 100, // Random horizontal position (0-100%)
